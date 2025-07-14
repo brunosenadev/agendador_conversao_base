@@ -1,0 +1,760 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  background-color: #0e0e0e;
+  color: #f0f0f0;
+  font-family: 'Inter', sans-serif;
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  color: #e53935;
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+h1::before {
+  content: "\1F4C5";
+  font-size: 28px;
+}
+
+h2 {
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+/* PAINEL DE FILTROS */
+.painel-filtros {
+  background-color: #181818;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.painel-filtros .grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.painel-filtros label {
+  font-size: 13px;
+  color: #ccc;
+  font-weight: 500;
+}
+
+.painel-filtros input[type="date"] {
+  padding: 10px;
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-radius: 6px;
+  border: 1px solid #444;
+  width: 160px;
+  font-size: 14px;
+}
+
+.painel-filtros input.erro {
+  border-color: #e53935;
+}
+
+/* RESUMO */
+.resumo {
+  font-size: 14px;
+  color: #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.resumo span {
+  font-weight: bold;
+}
+
+.vermelho {
+  color: #e53935;
+}
+
+.verde {
+  color: #00e676;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #2b2b2b;
+  margin: 30px 0 20px;
+}
+
+.agendamentos-titulo {
+  text-align: center;
+  font-size: 15px;
+  color: #ccc;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.nenhum-agendamento {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.voltar-link,
+.voltar {
+  color: #e53935;
+  display: block;
+  text-align: center;
+  margin-top: 40px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.voltar-link:hover,
+.voltar:hover {
+  text-decoration: underline;
+}
+
+.card-agendamento {
+  background-color: #181818;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 20px 0;
+  box-shadow: 0 0 4px #00000033;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-topo .cliente {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.card-topo .valor {
+  color: #e53935;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.card-tags {
+  display: flex;
+  gap: 10px;
+}
+
+.tag {
+  background-color: #e53935;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.card-detalhes {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #ccc;
+  gap: 12px;
+}
+
+.card-detalhes div {
+  min-width: 100px;
+}
+
+.card-detalhes small {
+  color: #888;
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.card-botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  padding: 14px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn.concluir {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn.agendamento {
+  background-color: #e53935;
+  color: white;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.btn.voltar {
+  background-color: #4da6ff;
+  color: white;
+}
+
+.btn.remover {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn.voltar:hover,
+.btn.voltar:visited,
+.btn.voltar:focus {
+  text-decoration: none;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* FORMULÁRIO */
+form {
+  background-color: #181818;
+  padding: 25px;
+  border: 1px solid #2e2e2e;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #00000080;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+legend {
+  color: #e53935;
+  font-weight: 600;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: block;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  font-size: 14px;
+  width: 100%;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* CHECKBOX */
+.checkbox-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #f0f0f0;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.1);
+  accent-color: #e53935;
+}
+
+.card-botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.card-botoes form {
+  margin: 0;
+}
+
+.card-botoes .btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.card-botoes .btn.concluir {
+  background-color: #e53935;
+  color: white;
+}
+
+.card-botoes .btn.remover {
+  background-color: #e53935;
+  color: white;
+}
+
+.card-botoes .btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.card-agendamento {
+  background-color: #181818;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 20px 0;
+  box-shadow: 0 0 6px #00000033;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-topo .cliente {
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.card-topo .valor {
+  color: #e53935;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* NOVO BLOCO - TAGS + BOTÕES NA MESMA LINHA */
+.card-tags-botoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  background-color: #e53935;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* BOTÕES PEQUENOS */
+.card-botoes {
+  display: flex;
+  gap: 8px;
+}
+
+.card-botoes form {
+  margin: 0;
+}
+
+.card-botoes .btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.card-botoes .btn.concluir {
+  background-color: #e53935;
+  color: white;
+}
+
+.card-botoes .btn.remover {
+  background-color: #e53935;
+  color: white;
+}
+
+.card-botoes .btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* DETALHES INFERIORES */
+.card-detalhes {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #ccc;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.card-detalhes div {
+  min-width: 100px;
+}
+
+.card-detalhes small {
+  color: #888;
+  display: block;
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+.card-botoes form {
+  all: unset;
+}
+
+.card-botoes form button {
+  all: unset;
+  background-color: #e53935;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease;
+  display: inline-block;
+}
+
+.card-botoes form button.remover {
+  background-color: #e53935;
+}
+
+.card-botoes form button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.resumo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.linha-resumo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #ccc;
+  gap: 10px;
+}
+
+.novo.agendamento {
+    display: flex;
+    justify-content: center;
+}
+
+/* Alinhar os 2 inputs lado a lado */
+.datas-duplas {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+/* Corrigir largura */
+.datas-duplas .grupo {
+  width: 160px;
+}
+
+/* Resumo: títulos à esquerda e valores à direita */
+.resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: auto;
+  min-width: 180px;
+}
+
+.linha-resumo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #ccc;
+  gap: 8px;
+}
+
+.resumo-label {
+  text-align: left;
+  flex: 1;
+  font-weight: 500;
+}
+
+.resumo-valor {
+  text-align: right;
+  font-weight: bold;
+  min-width: 60px;
+}
+
+/* Agrupa os campos em linha */
+.grupo-inline {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.filtros-esquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Corrige alinhamento dos valores do resumo */
+.resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: auto;
+  min-width: 200px;
+}
+
+.linha-resumo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #ccc;
+  gap: 10px;
+}
+
+.resumo-label {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+}
+
+.resumo-valor {
+  flex-shrink: 0;
+  text-align: right;
+  font-weight: bold;
+  min-width: 60px;
+}
+
+.card-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.cliente {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-concluido {
+    background-color: #2e7d32;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-pendente {
+    background-color: #fbc02d;
+    color: #000;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.card-detalhes {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+    background-color: #1e1e1e;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.card-detalhes small {
+    display: block;
+    color: #aaa;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.card-detalhes div div {
+    color: #f0f0f0;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.painel-filtros {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.filtros-esquerda {
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-inline {
+    display: flex;
+    gap: 16px;
+}
+
+.grupo label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+.grupo input[type="date"] {
+    background-color: #1d1d1d;
+    color: #f0f0f0;
+    border: 1px solid #444;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.resumo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #151515;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    min-width: 250px;
+}
+
+.linha-resumo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.coluna-label {
+    flex: 1;
+    font-size: 14px;
+    color: #ccc;
+    font-weight: 500;
+}
+
+.coluna-valor {
+    font-size: 15px;
+    font-weight: bold;
+    min-width: 80px;
+    text-align: right;
+}
+
+.destaque.vermelho {
+    color: #e53935;
+}
+
+.destaque.verde {
+    color: #4caf50;
+}
+
+.btn.limpar {
+    margin-top: 28px;
+    background-color: #555;
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn.limpar:hover {
+    background-color: #777;
+}
+
+

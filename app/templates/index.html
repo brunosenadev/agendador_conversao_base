@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Agendamentos</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body>
+  <h1>Agendamentos</h1>
+  <h2>Lista de Agendamentos de Conversão de Base de Dados</h2>
+    <div class="card-botoes">
+        <form method="get" action="/cad_agendamento">
+            <button type="submit" class="btn agendamento"> + Criar Agendamento</button>
+        </form>
+    </div>
+    <div class="painel-filtros">
+        <div class="filtros-esquerda">
+            <div class="grupo-inline">
+                <div class="grupo">
+                    <label for="data_de">De:</label>
+                    <input type="date" id="data_de" name="data_de" value="{{ data_de }}">
+                </div>
+                <button type="button" id="limpar-filtros" class="btn limpar">Limpar Filtros</button>
+            </div>
+        </div>
+
+        <div class="resumo">
+            <div class="linha-resumo">
+                <div class="coluna-label">Total de conversões:</div>
+                <div class="coluna-valor destaque vermelho">{{ total }}</div>
+            </div>
+            <div class="linha-resumo">
+                <div class="coluna-label">Conclusões:</div>
+                <div class="coluna-valor destaque verde">{{ concluidos }}</div>
+            </div>
+            <div class="linha-resumo">
+                <div class="coluna-label">Valor Total:</div>
+                <div class="coluna-valor destaque vermelho">
+                    R$ {{ "{:,.2f}".format(valor_total).replace(",", "X").replace(".", ",").replace("X", ".") }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+  <hr>
+
+  <div class="agendamentos-titulo">📌 Agendamentos ({{ agendamentos|length }})</div>
+  {% if agendamentos %}
+    {% for item in agendamentos %}
+    <div class="card-agendamento">
+        <div class="card-topo">
+            <strong class="cliente">
+                {{ item.id }} – {{ item.cliente }}
+                {% if item.concluido %}
+                    <span class="status-concluido">✅ CONCLUÍDO</span>
+                {% else %}
+                    <span class="status-pendente">⏳ PENDENTE</span>
+                {% endif %}
+            </strong>
+            <span class="valor">R$ {{ item.valor }}</span>
+        </div>
+
+        <div class="card-tags-botoes">
+            <div class="card-tags">
+            {% if item.unificado %}
+                <span class="tag">Unificado</span>
+            {% endif %}
+            {% if item.sisplan_web %}
+                <span class="tag">Sisplan Web</span>
+            {% endif %}
+            </div>
+
+            <div class="card-botoes">
+                <form method="post" action="/concluir/{{ item.id }}">
+                    <button type="submit" class="btn concluir">Marcar Concluído</button>
+                </form>
+                <form method="post" action="/remover/{{ item.id }}">
+                    <button type="submit" class="btn remover">Removedor</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card-detalhes">
+            <div>
+            <small>Data da Conversão</small>
+            <div>{{ item.data_conversao.strftime('%d/%m/%Y') }}</div>
+            </div>
+            <div>
+            <small>Último dia</small>
+            <div>{{ item.ultimo_dia_trabalho }}</div>
+            </div>
+            <div>
+            <small>Horário</small>
+            <div>{{ item.horario_trabalho }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="nenhum-agendamento">❌ Nenhum agendamento encontrado.</div>
+  {% endif %}
+    <script>
+        document.addEventListener("keydown", function (e) {
+            const active = document.activeElement;
+
+            if (active && active.tagName === "INPUT" && active.type === "date") {
+                const currentValue = active.value;
+
+                // Tecla T = hoje
+                if (e.key.toLowerCase() === "t") {
+                    const hoje = new Date();
+                    const yyyy = hoje.getFullYear();
+                    const mm = String(hoje.getMonth() + 1).padStart(2, "0");
+                    const dd = String(hoje.getDate()).padStart(2, "0");
+                    active.value = `${yyyy}-${mm}-${dd}`;
+                    e.preventDefault();
+                }
+            }
+        });
+
+        document.querySelectorAll('input[type="date"]').forEach(function(input) {
+        input.addEventListener("blur", function () {
+            const data_de = document.getElementById("data_de")?.value;
+
+            const params = new URLSearchParams();
+
+            if (data_de) params.append("data_de", data_de);
+
+            window.location.href = "/?" + params.toString();
+        });
+
+        document.getElementById("limpar-filtros").addEventListener("click", function () {
+            window.location.href = "/";
+        });
+    });
+    </script>
+</body>
+</html>

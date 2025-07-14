@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Agendamento</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body>
+    <h1>Sistema de Agendamento</h1>
+    <h2>Cadastro de Agendamento de Conversão de Bases de Dados</h2>
+
+    <form method="post" action="/cad_agendamento/criar">
+        <fieldset>
+            <div class="novo agendamento">
+                <legend>Novo Agendamento</legend>
+            </div> 
+            
+            <label>Cliente *</label>
+            <input type="text" name="cliente" required>
+
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="unificado"> Unificado</label>
+                <label><input type="checkbox" name="sisplan_web"> Sisplan Web</label>
+            </div>
+
+            <label>Data da Conversão *</label>
+            <input type="date" name="data_conversao" required>
+
+            <label>Último Dia de Trabalho</label>
+            <select name="ultimo_dia_trabalho">
+                <option value="">Selecione o dia</option>
+                <option>Segunda-feira</option>
+                <option>Terça-feira</option>
+                <option>Quarta-feira</option>
+                <option>Quinta-feira</option>
+                <option>Sexta-feira</option>
+                <option>Sábado</option>
+                <option>Domingo</option>
+            </select>
+
+            <label>Horário de Trabalho</label>
+            <input type="time" name="horario_trabalho">
+
+            <label>Valor</label>
+            <input type="text" name="valor" placeholder="0,00">
+
+            <label>Conexão</label>
+            <textarea name="conexao" placeholder="Descrição da conexão ou observações"></textarea>
+
+            <div class="botoes-linha">
+                <button type="submit" class="btn concluir">🗓️ Agendar Conversão</button>
+                <a href="/" class="btn voltar">⬅️ Voltar</a>
+            </div>
+
+        </fieldset>
+    </form>
+
+    <!-- SCRIPT adicionando data atual ao pressionar T -->
+    <script>
+        document.addEventListener("keydown", function (e) {
+            if (e.key.toLowerCase() === "t") {
+                const active = document.activeElement;
+                if (active && active.tagName === "INPUT" && active.type === "date") {
+                    const hoje = new Date();
+                    const yyyy = hoje.getFullYear();
+                    const mm = String(hoje.getMonth() + 1).padStart(2, "0");
+                    const dd = String(hoje.getDate()).padStart(2, "0");
+                    active.value = `${yyyy}-${mm}-${dd}`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
