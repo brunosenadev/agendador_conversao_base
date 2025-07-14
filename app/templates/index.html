@@ -20,6 +20,8 @@
                 <div class="grupo">
                     <label for="data_de">De:</label>
                     <input type="date" id="data_de" name="data_de" value="{{ data_de }}">
+                    <label for="data_ate">Até:</label>
+                    <input type="date" id="data_ate" name="data_ate" value="{{ data_ate }}">
                 </div>
                 <button type="button" id="limpar-filtros" class="btn limpar">Limpar Filtros</button>
             </div>
@@ -123,10 +125,12 @@
         document.querySelectorAll('input[type="date"]').forEach(function(input) {
         input.addEventListener("blur", function () {
             const data_de = document.getElementById("data_de")?.value;
+            const data_ate = document.getElementById("data_ate")?.value;
 
             const params = new URLSearchParams();
 
             if (data_de) params.append("data_de", data_de);
+            if (data_ate) params.append("data_ate", data_ate);
 
             window.location.href = "/?" + params.toString();
         });

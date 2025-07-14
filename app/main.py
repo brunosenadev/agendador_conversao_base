@@ -45,16 +45,23 @@ def cadastro_agendamentos(request: Request):
 
 
 @app.get("/", response_class=HTMLResponse)
-def lista_agendamentos(request: Request, data_de: str = ""):
+def lista_agendamentos(request: Request, data_de: str = "", data_ate: str = ""):
     db = SessionLocal()
     query = db.query(Agendamento)
 
     if data_de:
         try:
             data_convertida = datetime.strptime(data_de, "%Y-%m-%d").date()
-            query = query.filter(Agendamento.data_conversao == data_convertida)
+            query = query.filter(Agendamento.data_conversao >= data_convertida)
         except ValueError:
-            pass 
+            pass  
+    
+    if data_ate:
+        try:
+            data_convertida_ate = datetime.strptime(data_ate, "%Y-%m-%d").date()
+            query = query.filter(Agendamento.data_conversao <= data_convertida_ate)
+        except ValueError:
+            pass
 
     dados = query.order_by(desc(Agendamento.id)).all()
 
@@ -73,7 +80,8 @@ def lista_agendamentos(request: Request, data_de: str = ""):
         "total": total,
         "concluidos": concluidos,
         "valor_total": valor_total,
-        "data_de": data_de  
+        "data_de": data_de,
+        "data_ate": data_ate  
     })
 @app.post("/remover/{agendamento_id}")
 def remover_agendamento(agendamento_id: int, request: Request):
