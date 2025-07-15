@@ -51,7 +51,7 @@
   <div class="agendamentos-titulo">📌 Agendamentos ({{ agendamentos|length }})</div>
   {% if agendamentos %}
     {% for item in agendamentos %}
-    <div class="card-agendamento">
+    <div class="card-agendamento" data-observacao="{{ item.conexao }}">
         <div class="card-topo">
             <strong class="cliente">
                 {{ item.id }} – {{ item.cliente }}
@@ -103,6 +103,13 @@
   {% else %}
     <div class="nenhum-agendamento">❌ Nenhum agendamento encontrado.</div>
   {% endif %}
+    <div id="modalObservacao" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" id="fecharModal">&times;</span>
+            <h3>📝 Observação do Agendamento</h3>
+            <p id="conteudoObservacao"></p>
+        </div>
+    </div>
     <script>
         document.addEventListener("keydown", function (e) {
             const active = document.activeElement;
@@ -138,6 +145,27 @@
         document.getElementById("limpar-filtros").addEventListener("click", function () {
             window.location.href = "/";
         });
+
+        document.querySelectorAll(".card-agendamento").forEach(card => {
+            card.addEventListener("click", function (e) {
+                if (e.target.tagName === "BUTTON") return;
+
+                const observacao = this.getAttribute("data-observacao") || "Nenhuma observação cadastrada.";
+                document.getElementById("conteudoObservacao").innerText = observacao;
+                document.getElementById("modalObservacao").classList.remove("hidden");
+            });
+        });
+
+        document.getElementById("fecharModal").addEventListener("click", function () {
+            document.getElementById("modalObservacao").classList.add("hidden");
+        });
+
+        window.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+                document.getElementById("modalObservacao").classList.add("hidden");
+            }
+        });
+
     });
     </script>
 </body>
